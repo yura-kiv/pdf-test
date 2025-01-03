@@ -1,2 +1,11 @@
-const API_KEY = import.meta.env.VITE_API_KEY;
-const API_URL = 'http://95.217.134.12:4010/create-pdf';
+import axios from 'axios';
+import { API_KEY, API_URL } from '../utils/constants';
+
+export const generatePDF = async (text: string): Promise<Blob> => {
+  const response = await axios.post(
+    `${API_URL}?apiKey=${API_KEY}`,
+    { text },
+    { responseType: 'blob' }
+  );
+  return response.data;
+};
